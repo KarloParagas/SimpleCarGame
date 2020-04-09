@@ -9,13 +9,19 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
     //This function is for loading all resources before using them
     //Ex: Images, sounds
     preload() {
-
+        //Load images
+        this.load.image('road', 'images/road.jpg');
+        this.load.image('cars', 'images/cars.png', {framewidth: 60, frameHeight: 126});
     }
 
     //This function is for defining objects
     //Ex: Spaceships, bullets
     create() {
-        
+        //Create a road
+        var road = new Road({scene: this});
+
+        //Put the road in the center
+        road.x = game.config.width / 2;        
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
