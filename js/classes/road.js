@@ -8,10 +8,10 @@ class Road extends Phaser.GameObjects.Container {
         this.add(this.back); //Places the road inside the container
         this.scene.add.existing(this); //Add it to the scene
 
-        //Scale the road/"back" to 50% of the screen size, so 2 can fit
-        this.back.displayWidth = game.config.width * 0.5;
+        //Scale the road/"back" to 50% of the screen size
+        AlignHelper.scaleToGameWidth(this.back, 0.5)
 
-        //Makes sure the scale is proportional
-        this.back.scaleY = this.back.scaleX;
+        //Set a container size
+        this.setSize(this.back.displayWidth, game.config.height);
     }
 }
