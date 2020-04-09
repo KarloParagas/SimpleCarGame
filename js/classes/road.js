@@ -8,10 +8,21 @@ class Road extends Phaser.GameObjects.Container {
         this.add(this.back); //Places the road inside the container
         this.scene.add.existing(this); //Add it to the scene
 
-        //Scale the road/"back" to 50% of the screen size
-        AlignHelper.scaleToGameWidth(this.back, 0.5)
+        AlignHelper.scaleToGameWidth(this.back, 0.5); //Scale the road/"back" to 50% of the screen size
 
-        //Set a container size
-        this.setSize(this.back.displayWidth, game.config.height);
+        this.setSize(this.back.displayWidth, game.config.height); //Set a container size
+
+        this.lineGroup = this.scene.add.group(); //Add a line group
+    }
+
+    makeLines() {
+        this.lineSpace = this.displayHeight / 10; //Space out the lines to 1/10th of the height of the road
+
+        //Make the lines
+        for (var i = 0; i < 100; i++) {
+            //Add a line to the line group
+            var line = this.scene.add.image(this.x, this.lineSpace * i, 'line'); //.image(x, y, 'ImageKey')
+            this.lineGroup.add(line);
+        }
     }
 }
