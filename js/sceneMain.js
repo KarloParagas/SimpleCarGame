@@ -12,6 +12,7 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         //Load images
         this.load.image('road', 'images/road.jpg');
         this.load.image('cars', 'images/cars.png', {framewidth: 60, frameHeight: 126});
+        this.load.image('line', 'images/line.png');
     }
 
     //This function is for defining objects
@@ -21,7 +22,10 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         var road = new Road({scene: this});
 
         //Put the road in the center
-        road.x = game.config.width / 2;        
+        road.x = game.config.width / 2;  
+        
+        //Add lines to the road image
+        road.makeLines();
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
