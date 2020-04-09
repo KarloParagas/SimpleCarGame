@@ -19,19 +19,20 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
     //Ex: Spaceships, bullets
     create() {
         //Create a road
-        var road = new Road({scene: this});
+        this.road = new Road({scene: this});
 
         //Put the road in the center
-        road.x = game.config.width / 2;  
+        this.road.x = game.config.width / 2;  
         
         //Add lines to the road image
-        road.makeLines();
+        this.road.makeLines();
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
     //Ex: Collision, constantly update something
     update() {
-        
+        //Simulate movement of the lines so it looks like the car sprites (when added) are driving through the road
+        this.road.moveLines();
     }
 
     /*
