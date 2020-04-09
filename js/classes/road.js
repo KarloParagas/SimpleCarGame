@@ -15,6 +15,13 @@ class Road extends Phaser.GameObjects.Container {
         this.lineGroup = this.scene.add.group(); //Add a line group
 
         this.count = 0; //Count how many times the line is being moved
+
+        //Add a car to the game
+        this.car = this.scene.add.sprite(this.displayWidth / 4, game.config.height * 0.9, 'cars'); //25% of the road's display width, position the car 90% down on the screen
+        AlignHelper.scaleToGameWidth(this.car, 0.15); //Scale the car to 10% of the game's width
+
+        //Add the car to the road/container
+        this.add(this.car);
     }
 
     makeLines() {

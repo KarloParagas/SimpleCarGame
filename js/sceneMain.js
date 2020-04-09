@@ -11,8 +11,8 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
     preload() {
         //Load images
         this.load.image('road', 'images/road.jpg');
-        this.load.image('cars', 'images/cars.png', {framewidth: 60, frameHeight: 126});
         this.load.image('line', 'images/line.png');
+        this.load.image('cars', 'images/cars.png', {framewidth: 60, frameHeight: 126});
     }
 
     //This function is for defining objects
