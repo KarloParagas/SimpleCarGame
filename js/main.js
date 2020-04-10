@@ -1,5 +1,9 @@
 //Make the game a global object, so it's accessible anywhere
 var game;
+var model;
+var emitter;
+var G;
+var controller;
 
 window.onload = function() {
     var config = {
@@ -21,6 +25,11 @@ window.onload = function() {
             SceneMain
         ]
     };
+    //Create a constants instance
+    G = new Constants();
+
+    //Create a model instance
+    model = new Model();
 
     //Creates the game itself
     game = new Phaser.Game(config);
