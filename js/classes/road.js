@@ -93,6 +93,14 @@ class Road extends Phaser.GameObjects.Container {
 
     moveObject() {
         this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
+
+        if (CollisionHelper.checkCollision(this.car, this.object) == true) { //If the player car and one of the objects collide
+            this.car.alpha = 0.5; //Change the player's car transparency (test code)
+        }
+        else {
+            this.car.alpha = 1; //Don't change the player's car transparency
+        }
+
         if (this.object.y > game.config.height) { //If the object is below the bottom of the game (out of screen)
             this.object.destroy(); //Remove that object
             this.addObject(); //Add a new object
