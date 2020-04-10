@@ -4,8 +4,8 @@ class Road extends Phaser.GameObjects.Container {
     constructor(config) {
         super(config.scene); //Pass the scene to Phaser.GameObjects.Container's constructor
         this.scene = config.scene; //Makes a reference to the scene
-        this.back = this.scene.add.image(0, 0, 'road'); //Places the image of the road in this class
-        this.add(this.back); //Places the road inside the container
+        this.back = this.scene.add.image(0, 0, 'road'); //Declare a "back" variable containing an image that you want to add
+        this.add(this.back); //Add the road inside the container
         this.scene.add.existing(this); //Add it to the scene
 
         AlignHelper.scaleToGameWidth(this.back, 0.5); //Scale the road/"back" to 50% of the screen size
@@ -16,7 +16,7 @@ class Road extends Phaser.GameObjects.Container {
 
         this.count = 0; //Count how many times the line is being moved
 
-        //Add a car to the game
+        //Declare a "car" variable containing an image that you want to add
         this.car = this.scene.add.sprite(this.displayWidth / 4, game.config.height * 0.9, 'cars'); //25% of the road's display width, position the car 90% down on the screen
         AlignHelper.scaleToGameWidth(this.car, 0.10); //Scale the car to 10% of the game's width
 
@@ -26,6 +26,20 @@ class Road extends Phaser.GameObjects.Container {
         //Add click event
         this.back.setInteractive(); //Allow the back to take input
         this.back.on('pointerdown', this.changeLanes, this); //When user clicks the mouse, call changeLanes and pass "this" scene
+
+        //Add an obstacle in the road
+        this.addObject();
+    }
+
+    addObject() {
+        //Declare an "object" variable containing an image that you want to add
+        this.object = this.scene.add.sprite(-this.displayWidth / 4, 0 , 'pcar1'); //(lane(x), startingPosition(y), 'objectImage')
+        var lane = Math.random() * 100; //Generate a random number between 1 and 100
+        if (lane < 50) { //If the randomly generated number is less than 50
+            this.object.x = this.displayWidth / 4; //Add the object in the right lane
+        }
+        AlignHelper.scaleToGameWidth(this.object, 0.10); //Scale the object to 10% of the game's width
+        this.add(this.object); //Add the object in the road, making the object a child of the container
     }
 
     changeLanes() {
@@ -42,10 +56,10 @@ class Road extends Phaser.GameObjects.Container {
 
         //Make the lines
         for (var i = 0; i < 20; i++) {
-            //Add a line to the line group
-            var line = this.scene.add.image(this.x, this.lineSpace * i, 'line'); //.image(x, y, 'ImageKey')
-            line.originalY = line.y;
-            this.lineGroup.add(line);
+            //Declare a line variable containing an image that you want to add
+            var line = this.scene.add.image(this.x, this.lineSpace * i, 'line'); //.image(SetPositionSameToRoadsX(x), LinePosition(y), 'ImageKey')
+            line.originalY = line.y; //Records the original position of the y
+            this.lineGroup.add(line); //Add the line in the road, making it a child of the container
             //Note: Each item that get's added to the group are now the first line's children
         }
     }
@@ -53,7 +67,7 @@ class Road extends Phaser.GameObjects.Container {
     moveLines() {
         //Loop through lineGroup's children
         this.lineGroup.children.iterate(function(child){ //Note: iterate() is one of the group() functions
-            child.y += this.lineSpace / 20; //Decrease the speed by a factor of 20
+            child.y += this.lineSpace / 20; //Decrease the speed of the line along the y axis by 20
         }.bind(this)); //.bind(this) is used to make sure "this" binds/refers to the scene, and not to the group
 
         //Increment count by 1
@@ -62,10 +76,17 @@ class Road extends Phaser.GameObjects.Container {
         //If lines have been moved 20 times
         if (this.count == 20) {
             this.count = 0; //Reset the count
-
-            this.lineGroup.children.iterate(function(child){
+            this.lineGroup.children.iterate(function(child){ //Loop through lineGroup's children again
                 child.y = child.originalY; //Reset the new y position to the original y position
             }.bind(this));
+        }
+    }
+
+    moveObject() {
+        this.object.y += this.lineSpace / 15; //Decrease the speed of the object along the y axis by 15
+        if (this.object.y > game.config.height) { //If the object is below the bottom of the game (out of screen)
+            this.object.destroy(); //Remove that object
+            this.addObject(); //Add a new object
         }
     }
 }
