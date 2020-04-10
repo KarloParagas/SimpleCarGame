@@ -32,8 +32,12 @@ class Road extends Phaser.GameObjects.Container {
     }
 
     addObject() {
+        var objects = ['pcar1', 'pcar2', 'cone', 'barrier']; //Create an array of objects
+        var index = Math.floor(Math.random() * 3); //Randomly generate an index between 1 - 3
+        var key = objects[index]; //Key variable containing a randomly generated an object from the array
+
         //Declare an "object" variable containing an image that you want to add
-        this.object = this.scene.add.sprite(-this.displayWidth / 4, 0 , 'pcar1'); //(lane(x), startingPosition(y), 'objectImage')
+        this.object = this.scene.add.sprite(-this.displayWidth / 4, 0 , key); //(lane(x), startingPosition(y), 'objectImage')
         var lane = Math.random() * 100; //Generate a random number between 1 and 100
         if (lane < 50) { //If the randomly generated number is less than 50
             this.object.x = this.displayWidth / 4; //Add the object in the right lane
