@@ -22,6 +22,19 @@ class Road extends Phaser.GameObjects.Container {
 
         //Add the car to the road/container
         this.add(this.car);
+
+        //Add click event
+        this.back.setInteractive(); //Allow the back to take input
+        this.back.on('pointerdown', this.changeLanes, this); //When user clicks the mouse, call changeLanes and pass "this" scene
+    }
+
+    changeLanes() {
+        if (this.car.x > 0) { //If the car if on the right lane
+            this.car.x = -this.displayWidth / 4; //Move to the left lane
+        }
+        else { //If the car is on the left lane
+            this.car.x = this.displayWidth / 4; //Move to the right lane
+        }
     }
 
     makeLines() {
