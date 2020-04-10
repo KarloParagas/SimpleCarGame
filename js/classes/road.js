@@ -102,6 +102,7 @@ class Road extends Phaser.GameObjects.Container {
         }
 
         if (this.object.y > game.config.height) { //If the object is below the bottom of the game (out of screen)
+            emitter.emit(G.UP_POINTS, 1); //Give the player 1 point
             this.object.destroy(); //Remove that object
             this.addObject(); //Add a new object
         }
