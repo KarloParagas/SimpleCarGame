@@ -32,17 +32,22 @@ class Road extends Phaser.GameObjects.Container {
     }
 
     addObject() {
-        var objects = ['pcar1', 'pcar2', 'cone', 'barrier']; //Create an array of objects
-        var index = Math.floor(Math.random() * 3); //Randomly generate an index between 1 - 3
-        var key = objects[index]; //Key variable containing a randomly generated an object from the array
+        //Create an array of objects
+        var objects = [{key: 'pcar1', speed: 10, scale: 10}, {key: 'pcar2', speed: 10, scale: 10}, {key: 'cone', speed: 20, scale: 5}, {key: 'barrier', speed: 20, scale: 8}];
+        var index = Math.floor(Math.random() * 4); //Randomly generate an index between 1 - 3
+        var key = objects[index].key; //Key variable containing a randomly generated an object/key from the array
+        var speed = objects[index].speed; //Speed variable containing the randomly generated key's speed property
+        var scale = objects[index].scale / 100; //Scale variable containing the randomly generated key's scale property
 
         //Declare an "object" variable containing an image that you want to add
         this.object = this.scene.add.sprite(-this.displayWidth / 4, 0 , key); //(lane(x), startingPosition(y), 'objectImage')
+        this.object.speed = speed; //Put the property in the object
+
         var lane = Math.random() * 100; //Generate a random number between 1 and 100
         if (lane < 50) { //If the randomly generated number is less than 50
             this.object.x = this.displayWidth / 4; //Add the object in the right lane
         }
-        AlignHelper.scaleToGameWidth(this.object, 0.10); //Scale the object to 10% of the game's width
+        AlignHelper.scaleToGameWidth(this.object, scale); //Scale the object to 10% of the game's width
         this.add(this.object); //Add the object in the road, making the object a child of the container
     }
 
@@ -87,7 +92,7 @@ class Road extends Phaser.GameObjects.Container {
     }
 
     moveObject() {
-        this.object.y += this.lineSpace / 15; //Decrease the speed of the object along the y axis by 15
+        this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
         if (this.object.y > game.config.height) { //If the object is below the bottom of the game (out of screen)
             this.object.destroy(); //Remove that object
             this.addObject(); //Add a new object
