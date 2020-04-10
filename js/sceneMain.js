@@ -22,6 +22,17 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
     //This function is for defining objects
     //Ex: Spaceships, bullets
     create() {
+        //Phaser.Events.EventEmitter() is a build in phaser function, that will allow global access to other parts of the game
+        emitter = new Phaser.Events.EventEmitter();
+
+        //Declare the instance of controller
+        controller = new Controller(); //Note: The instance of the emitter HAS to exist before the controller can be used.
+
+        //Create an instance of scorebox
+        this.scorebox = new ScoreBox({scene: this});
+        this.scorebox.x = game.config.width - 55 ; //Put it in the center
+        this.scorebox.y = 20; //Put it 50 pixels down from the top
+
         //Create a road
         this.road = new Road({scene: this});
 
