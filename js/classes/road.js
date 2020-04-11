@@ -31,6 +31,9 @@ class Road extends Phaser.GameObjects.Container {
         this.addObject();
     }
 
+    /**
+     * Adds a random object in the game's road
+     */
     addObject() {
         //Create an array of objects
         var objects = [{key: 'pcar1', speed: 10, scale: 10}, {key: 'pcar2', speed: 10, scale: 10}, {key: 'cone', speed: 20, scale: 5}, {key: 'barrier', speed: 20, scale: 8}];
@@ -51,6 +54,9 @@ class Road extends Phaser.GameObjects.Container {
         this.add(this.object); //Add the object in the road, making the object a child of the container
     }
 
+    /**
+     * Moves the player car on the left or right lane
+     */
     changeLanes() {
         if (this.car.x > 0) { //If the car if on the right lane
             this.car.x = -this.displayWidth / 4; //Move to the left lane
@@ -60,6 +66,9 @@ class Road extends Phaser.GameObjects.Container {
         }
     }
 
+    /**
+     * Road lines/lane dividers
+     */
     makeLines() {
         this.lineSpace = this.displayHeight / 10; //Space out the lines to 1/10th of the height of the road
 
@@ -73,6 +82,9 @@ class Road extends Phaser.GameObjects.Container {
         }
     }
 
+    /**
+     * Moves the lines/lane dividers 
+     */
     moveLines() {
         //Loop through lineGroup's children
         this.lineGroup.children.iterate(function(child){ //Note: iterate() is one of the group() functions
@@ -91,6 +103,9 @@ class Road extends Phaser.GameObjects.Container {
         }
     }
 
+    /**
+     * Moves the object created down the road and also checks for collision
+     */
     moveObject() {
         this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
 
