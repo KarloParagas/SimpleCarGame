@@ -28,19 +28,17 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         //Declare the instance of controller
         controller = new Controller(); //Note: The instance of the emitter HAS to exist before the controller can be used.
 
-        //Create an instance of scorebox
-        this.scorebox = new ScoreBox({scene: this});
+        this.scorebox = new ScoreBox({scene: this}); //Create an instance of scorebox
         this.scorebox.x = game.config.width - 55 ; //Put it in the center
-        this.scorebox.y = 20; //Put it 50 pixels down from the top
+        this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
 
-        //Create a road
-        this.road = new Road({scene: this});
+        this.road = new Road({scene: this}); //Create an instance of road
+        this.road.x = game.config.width / 2; //Put the road in the center       
+        this.road.makeLines(); //Put it in the game, on top of the road image
 
-        //Put the road in the center
-        this.road.x = game.config.width / 2;  
-        
-        //Add lines to the road image
-        this.road.makeLines();
+        this.alignGrid = new AlignGrid({scene: this, rows: 5, cold: 5}); //Create an instance of grid
+        this.alignGrid.showNumbers(); //Put it in the game
+        this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
