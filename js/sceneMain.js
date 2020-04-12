@@ -37,8 +37,8 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         this.road.makeLines(); //Put it in the game, on top of the road image
 
         this.alignGrid = new AlignGrid({scene: this, rows: 5, cold: 5}); //Create an instance of grid
-        this.alignGrid.showNumbers(); //Put it in the game
-        this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid
+        this.alignGrid.showNumbers(); //Display the grid squares
+        this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid square index/number
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
