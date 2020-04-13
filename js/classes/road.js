@@ -122,7 +122,6 @@ class Road extends Phaser.GameObjects.Container {
         this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
 
         if (CollisionHelper.checkCollision(this.car, this.object) == true) { //If the player car and one of the objects collide
-            this.car.alpha = 0.5; //Change the player's car transparency (test code)
             model.gameOver = true; //Set the gameOver variable in model.js to true
             this.scene.tweens.add({targets: this.car, duration: 1000, y: game.config.height, angle: -270}); //Creates a small animation upon collision
 
@@ -130,9 +129,14 @@ class Road extends Phaser.GameObjects.Container {
                 Note: A Tween allows you to alter one or more properties of a target object over a defined period of time. 
                       This can be used for things such as alpha fading Sprites, scaling them or motion.
             */
-        }
-        else {
-            this.car.alpha = 1; //Don't change the player's car transparency
+
+           //When the user collides with an object and the crash animation is shown, call the gaveOverScreen function after a 2 second delay
+           this.scene.time.addEvent({ 
+               delay: 2000, 
+               callback: this.gameOverScreen, 
+               callbackScope: this.scene, 
+               loop: false 
+            });
         }
 
         if (this.object.y > game.config.height) { //If the object is below the bottom of the game (out of screen)
@@ -140,5 +144,12 @@ class Road extends Phaser.GameObjects.Container {
             this.object.destroy(); //Remove that object
             this.addObject(); //Add a new object
         }
+    }
+
+    /**
+     * Takes the player to the game over screen once the car crashes.
+     */
+    gameOverScreen() {
+        this.scene.start('SceneOver'); //Goes to the SceneOver screen
     }
 }
