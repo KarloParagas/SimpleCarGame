@@ -58,6 +58,10 @@ class Road extends Phaser.GameObjects.Container {
      * Moves the player car on the left or right lane
      */
     changeLanes() {
+        if (model.gameOver == true) { //If the car has collided with an object, and the game is over
+            return; //Return out of the function
+        }
+
         if (this.car.x > 0) { //If the car if on the right lane
             this.car.x = -this.displayWidth / 4; //Move to the left lane
         }
@@ -86,6 +90,10 @@ class Road extends Phaser.GameObjects.Container {
      * Moves the lines/lane dividers 
      */
     moveLines() {
+        if (model.gameOver == true) { //If the car has collided with an object, and the game is over
+            return; //Return out of the function
+        }
+
         //Loop through lineGroup's children
         this.lineGroup.children.iterate(function(child){ //Note: iterate() is one of the group() functions
             child.y += this.lineSpace / 20; //Decrease the speed of the line along the y axis by 20
@@ -107,10 +115,15 @@ class Road extends Phaser.GameObjects.Container {
      * Moves the object created down the road and also checks for collision
      */
     moveObject() {
+        if (model.gameOver == true) { //If the car has collided with an object, and the game is over
+            return; //Return out of the function
+        }
+
         this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
 
         if (CollisionHelper.checkCollision(this.car, this.object) == true) { //If the player car and one of the objects collide
             this.car.alpha = 0.5; //Change the player's car transparency (test code)
+            model.gameOver = true; //Set the gameOver variable in model.js to true
         }
         else {
             this.car.alpha = 1; //Don't change the player's car transparency
