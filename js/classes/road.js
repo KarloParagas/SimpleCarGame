@@ -119,7 +119,7 @@ class Road extends Phaser.GameObjects.Container {
             return; //Return out of the function
         }
 
-        this.object.y += this.lineSpace / this.object.speed; //Decrease the speed of the object along the y axis by 15
+        this.object.y += (this.lineSpace / this.object.speed) * model.speed; //Multiply the amount the object is advancing using model.speed
 
         if (CollisionHelper.checkCollision(this.car, this.object) == true) { //If the player car and one of the objects collide
             model.gameOver = true; //Set the gameOver variable in model.js to true

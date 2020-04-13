@@ -30,6 +30,10 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
 
         model.gameOver = false; //Sets the gameOver global variable in model.js to false so the player can play the game
 
+        //Default values for the speed and score everytime the game is started
+        model.speed = 1;
+        model.score = 0;
+
         //Road 1
         this.road = new Road({scene: this}); //Create an instance of road
         this.road.x = game.config.width * 0.25; //Put the road in the center       
@@ -48,7 +52,8 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
 
         this.scorebox = new ScoreBox({scene: this}); //Create an instance of scorebox
         this.scorebox.x = game.config.width / 2 ; //Put it in the center
-        this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
+        this.scorebox.y = 50; //Put it in the game,  50 pixels down from the top
+        emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this); //This will "listen" for an event (the score being updated)
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
@@ -71,4 +76,14 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         preload(), create(), and update() are the main functions, but you can also have custom/helper functions
         to help achieve whats needed
     */
+
+    scoreUpdated() {
+        //Increase the speed by 0.25 for every 5 points the player earns
+        if (model.score / 5 == Math.floor(model.score / 5)) { //If the score went up by 5
+            model.speed += 0.25;
+            if (model.speed > 1.5) { //If the speed has already reached 1.5, don't increase it anymore
+                model.speed = 1.5;
+            }
+        }
+    }
 }
