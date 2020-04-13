@@ -11,7 +11,7 @@ class ScoreBox extends Phaser.GameObjects.Container {
 
         this.scene.add.existing(this); //Add it to the scene
 
-        emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this); //This will "listen" for an event from the model to be emitted
+        emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this); //This will "listen" for an event (the score being updated)
     }
 
     scoreUpdated() {
