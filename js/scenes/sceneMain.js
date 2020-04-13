@@ -28,6 +28,8 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         //Declare the instance of controller
         controller = new Controller(); //Note: The instance of the emitter HAS to exist before the controller can be used.
 
+        model.gameOver = false; //Sets the gameOver global variable in model.js to false so the player can play the game
+
         this.scorebox = new ScoreBox({scene: this}); //Create an instance of scorebox
         this.scorebox.x = game.config.width - 55 ; //Put it in the center
         this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
@@ -37,7 +39,7 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         this.road.makeLines(); //Put it in the game, on top of the road image
 
         this.alignGrid = new AlignGrid({scene: this, rows: 5, cold: 5}); //Create an instance of grid
-        this.alignGrid.showNumbers(); //Display the grid squares
+        //this.alignGrid.showNumbers(); //Display the grid squares (For development only)
         this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid square index/number
     }
 
