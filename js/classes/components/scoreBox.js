@@ -7,6 +7,8 @@ class ScoreBox extends Phaser.GameObjects.Container {
         this.text1.setOrigin(0.5, 0.5); //Put the text in the senter of the canvas
         this.add(this.text1); //Add text/scorebox to the container
 
+        this.text1.setBackgroundColor("#000000");
+
         this.scene.add.existing(this); //Add it to the scene
 
         emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this); //This will "listen" for an event from the model to be emitted

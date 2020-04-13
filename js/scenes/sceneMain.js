@@ -30,10 +30,6 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
 
         model.gameOver = false; //Sets the gameOver global variable in model.js to false so the player can play the game
 
-        this.scorebox = new ScoreBox({scene: this}); //Create an instance of scorebox
-        this.scorebox.x = game.config.width - 55 ; //Put it in the center
-        this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
-
         //Road 1
         this.road = new Road({scene: this}); //Create an instance of road
         this.road.x = game.config.width * 0.25; //Put the road in the center       
@@ -48,7 +44,11 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
 
         this.alignGrid = new AlignGrid({scene: this, rows: 5, cols: 5}); //Create an instance of grid
         //this.alignGrid.showNumbers(); //Display the grid squares (For development only)
-        this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid square index/number
+        // this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid square index/number
+
+        this.scorebox = new ScoreBox({scene: this}); //Create an instance of scorebox
+        this.scorebox.x = game.config.width / 2 ; //Put it in the center
+        this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
     }
 
     //This function is a contant running loop. Anything that needs to be checked over and over
