@@ -4,15 +4,17 @@ class SceneOver extends Phaser.Scene {
     }
     preload()
     {
-        this.load.image('title', 'images/title.png');
+        //Load Images
+        this.load.image('gameOver', 'images/DED.png');
         this.load.image('button1', 'images/ui/button1.png');
     }
     create() {
+        var title = this.add.image(0, 0, 'gameOver'); //Adds the image to the game
+
         //Add a line grid to line up the title image
         this.alignGrid = new AlignGrid({rows: 11, cols: 11, scene: this});
         //this.alignGrid.showNumbers(); //Displays the grid squares
 
-        var title = this.add.image(0, 0, 'title'); //Adds the image to the game
         AlignHelper.scaleToGameWidth(title, 0.8); //Adjusts the title image to a specific size
         this.alignGrid.placeAtIndex(38, title); //Places the title image at grid square 38
 

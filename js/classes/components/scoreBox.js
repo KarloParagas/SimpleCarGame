@@ -16,6 +16,5 @@ class ScoreBox extends Phaser.GameObjects.Container {
 
     scoreUpdated() {
         this.text1.setText("SCORE:" + model.score); //Update the text with the current score of the game
-
     }
 }
