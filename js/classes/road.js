@@ -124,6 +124,12 @@ class Road extends Phaser.GameObjects.Container {
         if (CollisionHelper.checkCollision(this.car, this.object) == true) { //If the player car and one of the objects collide
             this.car.alpha = 0.5; //Change the player's car transparency (test code)
             model.gameOver = true; //Set the gameOver variable in model.js to true
+            this.scene.tweens.add({targets: this.car, duration: 1000, y: game.config.height, angle: -270}); //Creates a small animation upon collision
+
+            /*
+                Note: A Tween allows you to alter one or more properties of a target object over a defined period of time. 
+                      This can be used for things such as alpha fading Sprites, scaling them or motion.
+            */
         }
         else {
             this.car.alpha = 1; //Don't change the player's car transparency

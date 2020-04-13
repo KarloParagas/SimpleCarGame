@@ -47,6 +47,7 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         //Simulate movement of the lines so it looks like the car sprites (when added) are driving through the road
         this.road.moveLines();
 
+        //Simulate movement of the objects down the road
         this.road.moveObject();
     }
 
