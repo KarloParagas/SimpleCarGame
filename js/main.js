@@ -22,7 +22,9 @@ window.onload = function() {
 
         //These are where game screens in a game will be. Ex: Title screen, game over screen
         scene: [
-            SceneMain
+            SceneTitle,
+            SceneMain,
+            SceneOver
         ]
     };
     //Create a constants instance
