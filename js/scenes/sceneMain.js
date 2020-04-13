@@ -34,11 +34,19 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
         this.scorebox.x = game.config.width - 55 ; //Put it in the center
         this.scorebox.y = 20; //Put it in the game,  50 pixels down from the top
 
+        //Road 1
         this.road = new Road({scene: this}); //Create an instance of road
-        this.road.x = game.config.width / 2; //Put the road in the center       
+        this.road.x = game.config.width * 0.25; //Put the road in the center       
         this.road.makeLines(); //Put it in the game, on top of the road image
 
-        this.alignGrid = new AlignGrid({scene: this, rows: 5, cold: 5}); //Create an instance of grid
+        //Road 2
+        this.road2 = new Road({scene: this}); //Create an instance of road2
+        this.road2.x = game.config.width * 0.75; //Put the road in the center       
+        this.road2.makeLines(); //Put it in the game, on top of the road image
+
+        this.road2.car.setFrame(1); //Changes the second car to the red one by moving the frame in the spritesheet
+
+        this.alignGrid = new AlignGrid({scene: this, rows: 5, cols: 5}); //Create an instance of grid
         //this.alignGrid.showNumbers(); //Display the grid squares (For development only)
         this.alignGrid.placeAtIndex(4, this.scorebox); //Place the scoreboard according to the grid square index/number
     }
@@ -46,11 +54,16 @@ class SceneMain extends Phaser.Scene { //All properties and functions of Phaser.
     //This function is a contant running loop. Anything that needs to be checked over and over
     //Ex: Collision, constantly update something
     update() {
+        //Road 1
         //Simulate movement of the lines so it looks like the car sprites (when added) are driving through the road
         this.road.moveLines();
 
         //Simulate movement of the objects down the road
         this.road.moveObject();
+
+        //Road2
+        this.road2.moveLines();
+        this.road2.moveObject();
     }
 
     /*
