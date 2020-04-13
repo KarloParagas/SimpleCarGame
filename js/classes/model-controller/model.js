@@ -1,7 +1,8 @@
 class Model {
     constructor() { //This will store all of the game's variables/data
-        //Field
+        //Fields
         this._score = 0; 
+        this.gameOver = false;
     }
 
     set score(value) {
